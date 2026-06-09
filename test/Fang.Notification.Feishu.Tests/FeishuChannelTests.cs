@@ -26,9 +26,6 @@ namespace Fang.Notification.Feishu.Tests
         private InMemoryTokenCache _tokenCache;
         private FeishuChannel _channel;
 
-        private const string TestImagePath =
-            @"C:\Users\cjy56\Pictures\Snipaste_2025-05-15_10-55-03.png";
-
         [TestInitialize]
         public void Setup()
         {
@@ -48,6 +45,20 @@ namespace Fang.Notification.Feishu.Tests
 
             _channel = new FeishuChannel(
                 _httpClient, _mockOptions.Object, _mockSerializer.Object, _tokenCache);
+        }
+
+        private static string CreateTempImageFile()
+        {
+            var path = Path.Combine(Path.GetTempPath(), $"test_image_{Guid.NewGuid()}.png");
+            File.WriteAllBytes(path, new byte[] { 0x89, 0x50, 0x4E, 0x47 }); // PNG magic bytes
+            return path;
+        }
+
+        private static string CreateTempFile()
+        {
+            var path = Path.Combine(Path.GetTempPath(), $"test_file_{Guid.NewGuid()}.xlsx");
+            File.WriteAllBytes(path, new byte[] { 0x50, 0x4B, 0x03, 0x04 }); // ZIP/XLSX magic bytes
+            return path;
         }
 
         // ──────────────────────────────
@@ -124,12 +135,11 @@ namespace Fang.Notification.Feishu.Tests
         [TestMethod]
         public async Task SendAsync_ImageMessage_FromLocalFile_ShouldSucceed()
         {
-            // Assert the test image file exists
-            Assert.IsTrue(File.Exists(TestImagePath),
-                $"Test image not found at: {TestImagePath}");
-
+            var testImagePath = CreateTempImageFile();
+            try
+            {
             // Read the local image file as bytes, convert to base64
-            byte[] imageBytes = File.ReadAllBytes(TestImagePath);
+            byte[] imageBytes = File.ReadAllBytes(testImagePath);
             string imageBase64 = Convert.ToBase64String(imageBytes);
 
             var message = new ImageMessage
@@ -188,6 +198,11 @@ namespace Fang.Notification.Feishu.Tests
                     r.RequestUri != null &&
                     r.RequestUri.ToString().Contains("im/v1/images")),
                 ItExpr.IsAny<CancellationToken>());
+            }
+            finally
+            {
+                if (File.Exists(testImagePath)) File.Delete(testImagePath);
+            }
         }
 
         // ──────────────────────────────
@@ -197,10 +212,13 @@ namespace Fang.Notification.Feishu.Tests
         [TestMethod]
         public async Task SendAsync_FileMessage_FromLocalFile_ShouldSucceed()
         {
+            var tempFilePath = CreateTempFile();
+            try
+            {
             var message = new FileMessage
             {
-                FileUrl = @"C:\Users\cjy56\Desktop\考勤\1.xlsx",
-                FileName = "Snipaste_2025-05-15_10-55-03.png"
+                FileUrl = tempFilePath,
+                FileName = "test_file.xlsx"
             };
             var receiver = MessageReceiver.FromGroupChatId("oc_9bdf295b315929712b678ee36fb3fe5e");
 
@@ -253,6 +271,11 @@ namespace Fang.Notification.Feishu.Tests
                     r.RequestUri != null &&
                     r.RequestUri.ToString().Contains("im/v1/files")),
                 ItExpr.IsAny<CancellationToken>());
+            }
+            finally
+            {
+                if (File.Exists(tempFilePath)) File.Delete(tempFilePath);
+            }
         }
 
         // ──────────────────────────────

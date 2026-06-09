@@ -26,8 +26,17 @@ jobs:
       - name: Build
         run: dotnet build --no-restore --configuration Release
 
-      - name: Test
-        run: dotnet test --no-build --configuration Release --filter "FullyQualifiedName!~Integration"
+      - name: Test (Core)
+        run: dotnet test test/Fang.Notification.Core.Tests --no-build --configuration Release
+
+      - name: Test (DingTalk)
+        run: dotnet test test/Fang.Notification.DingTalk.Tests --no-build --configuration Release
+
+      - name: Test (Feishu)
+        run: dotnet test test/Fang.Notification.Feishu.Tests --no-build --configuration Release
+
+      - name: Test (WeCom)
+        run: dotnet test test/Fang.Notification.WeCom.Tests --no-build --configuration Release
 
       - name: Pack
         run: dotnet pack src/Fang.Notification.All/Fang.Notification.All.csproj --no-build --configuration Release --output ./nupkgs
