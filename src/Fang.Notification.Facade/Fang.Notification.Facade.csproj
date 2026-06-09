@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <RootNamespace>Fang.Notification.Facade</RootNamespace>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fang.Notification.Core\Fang.Notification.Core.csproj" />
+    <ProjectReference Include="..\Fang.Notification.Common\Fang.Notification.Common.csproj" />
+    <ProjectReference Include="..\Fang.Notification.DingTalk\Fang.Notification.DingTalk.csproj" />
+    <ProjectReference Include="..\Fang.Notification.Feishu\Fang.Notification.Feishu.csproj" />
+    <ProjectReference Include="..\Fang.Notification.WeCom\Fang.Notification.WeCom.csproj" />
+    <ProjectReference Include="..\Fang.Notification.Email\Fang.Notification.Email.csproj" />
+    <ProjectReference Include="..\Fang.Notification.Teams\Fang.Notification.Teams.csproj" />
+  </ItemGroup>
+</Project>

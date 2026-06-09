@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Fang.Notification.DingTalk</RootNamespace>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fang.Notification.Core\Fang.Notification.Core.csproj" />
+    <ProjectReference Include="..\Fang.Notification.Common\Fang.Notification.Common.csproj" />
+  </ItemGroup>
+</Project>

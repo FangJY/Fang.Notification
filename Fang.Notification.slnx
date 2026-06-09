@@ -1,0 +1,24 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/Sample.Console/Sample.Console.csproj" />
+    <Project Path="samples/Sample.WebApi/Sample.WebApi.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Fang.Notification.All/Fang.Notification.All.csproj" />
+    <Project Path="src/Fang.Notification.Common/Fang.Notification.Common.csproj" />
+    <Project Path="src/Fang.Notification.Core/Fang.Notification.Core.csproj" />
+    <Project Path="src/Fang.Notification.DingTalk/Fang.Notification.DingTalk.csproj" />
+    <Project Path="src/Fang.Notification.Email/Fang.Notification.Email.csproj" />
+    <Project Path="src/Fang.Notification.Facade/Fang.Notification.Facade.csproj" />
+    <Project Path="src/Fang.Notification.Feishu/Fang.Notification.Feishu.csproj" />
+    <Project Path="src/Fang.Notification.Teams/Fang.Notification.Teams.csproj" />
+    <Project Path="src/Fang.Notification.WeCom/Fang.Notification.WeCom.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/Fang.Notification.Core.Tests/Fang.Notification.Core.Tests.csproj" />
+    <Project Path="test/Fang.Notification.DingTalk.Tests/Fang.Notification.DingTalk.Tests.csproj" />
+    <Project Path="test/Fang.Notification.Feishu.Tests/Fang.Notification.Feishu.Tests.csproj" />
+    <Project Path="test/Fang.Notification.WeCom.Tests/Fang.Notification.WeCom.Tests.csproj" />
+    <Project Path="test/Fang.Notification.Integration.Tests/Fang.Notification.Integration.Tests.csproj" />
+  </Folder>
+</Solution>
