@@ -40,7 +40,7 @@ jobs:
         run: dotnet test test/Fang.Notification.WeCom.Tests --no-build --configuration Release
 
       - name: Pack
-        run: dotnet pack src/Fang.Notification.All/Fang.Notification.All.csproj --no-build --configuration Release --output ./nupkgs
+        run: dotnet pack src/**/*.csproj --no-build --configuration Release --output ./nupkgs
 
       - name: NuGet login
         uses: NuGet/login@v1
