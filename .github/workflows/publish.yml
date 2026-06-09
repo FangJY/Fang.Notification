@@ -39,8 +39,17 @@ jobs:
       - name: Test (WeCom)
         run: dotnet test test/Fang.Notification.WeCom.Tests --no-build --configuration Release
 
-      - name: Pack
-        run: dotnet pack src/**/*.csproj --no-build --configuration Release --output ./nupkgs
+      - name: Pack all required packages
+        run: |
+          dotnet pack src/Fang.Notification.Core/Fang.Notification.Core.csproj --no-build --configuration Release --output ./nupkgs
+          dotnet pack src/Fang.Notification.Common/Fang.Notification.Common.csproj --no-build --configuration Release --output ./nupkgs
+          dotnet pack src/Fang.Notification.DingTalk/Fang.Notification.DingTalk.csproj --no-build --configuration Release --output ./nupkgs
+          dotnet pack src/Fang.Notification.Feishu/Fang.Notification.Feishu.csproj --no-build --configuration Release --output ./nupkgs
+          dotnet pack src/Fang.Notification.WeCom/Fang.Notification.WeCom.csproj --no-build --configuration Release --output ./nupkgs
+          dotnet pack src/Fang.Notification.Email/Fang.Notification.Email.csproj --no-build --configuration Release --output ./nupkgs
+          dotnet pack src/Fang.Notification.Teams/Fang.Notification.Teams.csproj --no-build --configuration Release --output ./nupkgs
+          dotnet pack src/Fang.Notification.Facade/Fang.Notification.Facade.csproj --no-build --configuration Release --output ./nupkgs
+          dotnet pack src/Fang.Notification.All/Fang.Notification.All.csproj --no-build --configuration Release --output ./nupkgs
 
       - name: NuGet login
         uses: NuGet/login@v1
